@@ -1,0 +1,136 @@
+Topics
+------
+1) Java Source File Structure
+2) Class level modifiers
+3) Member level modifiers
+4) Interfaces
+
+Java Source File Structure
+--------------------------
+1) A Java file can contain any number of classes at a time.
+2) If there is no public class present in the Java file, we can use any name for the source file.
+   javac Filename.java
+   java classname
+3) There must be only one public class present in one Java file, and the public class must have the same name as file name.
+   Jaya.java
+   public class Jaya
+
+Ex:- 
+----
+case 1:- Jaya.java
+         class A{}
+         class B{}
+         class C{}
+
+compiled successfully.
+
+case 2:- Jaya.java
+         class A{}
+         public class B{}
+         class C{}
+
+Error:- Class B is public, should be declared in a file named B.java
+
+case 3:-  B.java
+          class A{}
+          public class B{}
+          public class C{}
+
+Error:- Class C is public, should be declared in a file named C.java
+
+4) A class must contain only one main method, if the file contains 3 classes then all classes can have their respective main methods.
+
+File:- Jaya.java
+
+class A{
+   PSVM(S A[]){
+     SOPL("A class main");
+   }
+}
+class B{
+   PSVM(S A[]){
+     SOPL("B class main");
+   }
+}
+class C{
+   PSVM(S A[]){
+     SOPL("C class main");
+   }
+}
+class D{}
+
+
+Compilation:- javac Jaya.java
+For every class present in the folder a separate .class file is generated.
+
+Interpretation:- 
+1) java A  -> A class main
+2) java B  -> B class main
+3) java C  -> C class main   
+4) java D    -> Exception in thread "main" java.lang.NoSuchMethodError: main 
+5) java Jaya -> Exception in thread "main" java.lang.NoClassDefFoundError: Jaya    
+
+200 classes
+-----------
+1) File 1 -> 150 classes
+2) File 2 -> 75 classes
+3) File 3 -> 25 classes
+
+1) Account a=new Account();
+   a.getInfo();
+Search for Account class in File1, File2, File3.
+2) Loan l=new Loan();
+   l.getInterest();
+Search for Loan class in File1, File2, File3.
+
+. This type of programming approach is worst because for every class we need to check all the files, lack of Readability and Maintainability.
+. So to make it more Readable and Maintainable, we need to put Account.class in Account.java, Loan.class in Loan.java (for one class only one source file)
+   
+ArrayList example
+-----------------
+1) class A{
+   	PSVM(S A[]){
+     	  ArrayList al=new ArrayList();
+     }
+   }
+
+Error:- cannot find symbol
+        symbol  : class ArrayList
+        location: class A
+
+2) class A{
+   	PSVM(S A[]){
+     	  SOPL(ArrayList);
+     }
+   }
+
+Error:- cannot find symbol
+        symbol  : variable ArrayList
+        location: class A
+
+Where is ur home? Danvaipeta, where is it?
+Path -> World.Asia.India.AP.East Godavari.Rajahmundry.Danvaipeta
+// no more questions will be arised.
+
+Veera Venkata Subrahmanya Varaprasad Naga Sastry
+3) class A{
+   	PSVM(S A[]){
+     	   java.util.ArrayList al=new java.util.ArrayList(); //fully qualified name
+     }
+   }
+   Compiled successfully
+
+4) It is difficult to use fully qualified name all the time because it increases length of the code and reduces readability, so import it. Hence import statement acts as typing shortcut.
+
+5) import java.util.ArrayList;
+   class A{
+   	PSVM(S A[]){
+     	   ArrayList al=new ArrayList(); //fully qualified name
+     }
+   }
+   Compiled successfully
+
+
+
+
+
