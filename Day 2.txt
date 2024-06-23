@@ -1,0 +1,169 @@
+Topics
+------
+1) Java Source File Structure
+2) Class level modifiers
+3) Member level modifiers
+4) Interfaces
+
+Types of import statements
+--------------------------
+1) Explicit class import    import java.util.ArrayList;
+2) Implicit class import    import java.util.*;
+
+. Depends on requirement, we use the type of import statements.
+. If we are using one or two classes from a package we can simply use explicit class import but when we are using more than 20 classes from a package it is better to go for implicit class import.
+. When we are importing more than one package using *, we can't find exactly where the class is present(which package holds that class). It reduces Readability and Maintainability.
+import com.hfdc.*;
+import com.icicibank.*; 
+. So it is preferable to use explicit class import, typing is more better than reading and analyzing the code. Improves readability of code.
+(Readability is more prior than typing)
+
+1) import java.util.ArrayList;     valid
+   import java.util.ArrayList.*;   X
+   import java.util.*;             valid
+   import java.util;               X
+
+   We need to import the class from the package.
+
+2) class myObject extends java.rmi.UnicastRemoteObject
+   {
+   }
+
+   It compiles fine even though we are not using the import statement because we used fully qualified name.
+
+3) import java.util.*;
+   import java.sql.*;
+   class Test{
+      PSVM(S A[]){
+        Date d=new Date();
+      }
+   }
+   
+   Date class is present in both util and sql, which Date class is used?
+   C Error:- Reference to Date is ambiguous.
+
+4) Data -> util, sql
+   List -> util, awt
+  
+   import java.util.Date;
+   import java.sql.*;
+   class Test{
+     PSVM(S A[]){
+        Date d = new Date();
+        SOPL(d.getClass().getName());  //java.util.Date
+     }
+   }
+   
+   Priorities (Resolving class names)
+   ----------
+   1) Explicit class import
+   2) classes present in current working directory (default package)
+   3) Implicit class import
+
+5) Pattern class
+   -------------
+   java
+     util
+       regex
+         Pattern
+
+   import java.*;              X   
+   import java.util.*;         X   (util is the sub package of java package)
+   import java.util.regex.*;   valid
+   no import required          X
+   
+   Whenever we are importing a Java package, all classes and interfaces present in that package are available to our program but not sub package classes. We need to write import statement upto sub package.
+
+   Method class
+   ------------
+   java
+     lang
+       reflect
+         method
+
+   java.lang is default package but not java.lang.reflect, so to import method class we use the statement called import java.lang.reflect.*;
+
+6) All classes and interfaces are by default available to Java program, we don't need to import these packages.
+   Default packages
+   ----------------
+   1) java.lang
+   2) default package (CWD)
+
+   class Test{
+      PSVM(S A[]){
+        String s = new String("Jaya");
+        Student s1 = new Student("Jaya",101);
+        SOPL(s1.name+" "+s1.rollno);
+      }
+   }
+
+   class Student{
+      String name;
+      int rollno;
+      Student(String name, int rollno){
+          this.name = name;
+          this.rollno = rollno;
+      }
+   }
+
+7) Which program will take more time to compile?
+   1) java.util.Arraylist; (fully qualified name)    less compile time   same ET
+   2) import java.util.ArrayList;                    more compile time   same ET
+      ArrayList  (short name)
+   
+   import statement is totally compile time related concept, if more number of imports then more will be the compile time but there is no effect on execution time.
+
+8) C language -> #include<stdio.h>    static include
+   Java lang  -> import java.io.*;    dynamic include
+   
+   In C language, at the beginning only all input output header files are loaded, in Java program at run time where there is a requirement for a class then the import statement loads the .class file(load on demand, when it is needed then only loaded). 
+
+   Java approach is good one, memory efficient. (load on demand / load on fly)
+
+-> In version 1.5, they introduced concepts like
+   --------------
+1) for-each loop
+2) var-args methods
+3) autoboxing and autounboxing
+4) generics
+5) co-variant return types
+6) Queue
+7) Annotations
+8) Enum
+9) static import  (only this is not recommended remaining 8 features are good)
+
+Static import
+-------------
+According to Sun microsystems, static import improves readability and reduces length of code. But according to World Wide programming experts using static import reduces readability and creates confusion.
+. If there is no specific requirement, it is not recommended to use static import.
+
+Without static import
+---------------------
+class Test{
+  PSVM(S A[]){
+    SOPL(Math.sqrt(u));
+    SOPL(Math.max(10,20));
+    SOPL(Math.random());  //no b/w 0 and 1
+  }
+}
+
+We are writing Math. for all the methods that are required number of times so here we will try to import this static class.
+
+With static import
+------------------
+import static java.lang.Math.sqrt;
+import static java.lang.Math.*;
+class Test{
+  PSVM(S A[]){
+    SOPL(sqrt(u));
+    SOPL(max(10,20));
+    SOPL(random());
+  }
+}
+
+
+
+
+
+
+   
